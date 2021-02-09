@@ -1,12 +1,12 @@
 const express = require('express');
 const env  = require('dotenv');
 const app = express();
-const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
 // routes
 const authRoutes = require('./routes/auth');
 const adminAuthRoutes = require('./routes/admin/auth');
+const categoryRoutes = require('./routes/category');
 
 // environment variable or you can say constants
 env.config();
@@ -23,10 +23,10 @@ mongoose.connect(
     console.log('Database Connected');
 });
 
-app.use(bodyParser.json()); // support json encoded bodies
-app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
+app.use(express.json()); 
 app.use('/api', authRoutes);
 app.use('/api/admin', adminAuthRoutes);
+app.use('/api/category', categoryRoutes);
 
 app.listen(process.env.PORT, () => {
     console.log(`Server is running on port ${process.env.PORT}`);
