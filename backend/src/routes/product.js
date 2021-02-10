@@ -13,7 +13,7 @@ const storage = multer.diskStorage({
     filename: function (req, file, cb) {
         cb(null, shortid.generate() + '-' + file.originalname)
     }
-})
+});
 
 const upload = multer({ storage });
 
